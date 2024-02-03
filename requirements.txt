@@ -2,3 +2,4 @@ SQLAlchemy
 nb-cli
 nonebot2[fastapi]
 nonebot-adapter-console
+nonebot-adapter-onebot
