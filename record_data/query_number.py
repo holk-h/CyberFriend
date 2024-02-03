@@ -1,7 +1,9 @@
 import sqlite3
 import datetime
 
-database_path = 'D:\holk\CyberFriend\plugins\message_record\message_record.db'
+from GetPathUtil import getPath
+
+database_path = getPath('plugins\message_record\message_record.db')
 
 def count_messages(db_path, target_group_id):
     conn = sqlite3.connect(db_path)

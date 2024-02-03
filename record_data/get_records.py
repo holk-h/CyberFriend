@@ -3,7 +3,9 @@ import json
 import datetime
 import re
 
-database_path = 'D:\holk\CyberFriend\plugins\message_record\message_record.db'
+from GetPathUtil import getPath
+
+database_path = getPath('plugins\message_record\message_record.db')
 
 def extract_and_convert_to_json(db_path, target_group_id):
     conn = sqlite3.connect(db_path)
@@ -29,5 +31,5 @@ def extract_and_convert_to_json(db_path, target_group_id):
 
 target_group_id = 536348689
 json_result = extract_and_convert_to_json(database_path, target_group_id)
-with open(f'D:/holk/CyberFriend/record_data/{target_group_id}_{datetime.date.today()}.json', 'w', encoding='utf-8') as f:
+with open(getPath(f'record_data/{target_group_id}_{datetime.date.today()}.json'), 'w', encoding='utf-8') as f:
     f.write(json_result)

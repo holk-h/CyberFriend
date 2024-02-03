@@ -3,7 +3,9 @@ import time
 from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-engine = create_engine('sqlite:///D:/holk/CyberFriend/plugins/message_record/message_record.db', echo=False)
+from GetPathUtil import getPath
+
+engine = create_engine('sqlite:///'+getPath("plugins/message_record/message_record.db"), echo=False)
 Base = declarative_base()
 session = sessionmaker(bind=engine)()
 

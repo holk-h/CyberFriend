@@ -1,9 +1,12 @@
 import requests
 import json
 
+from GetPathUtil import getPath
+
+
 class GLM:
     def __init__(self):
-        with open('D:\holk\CyberFriend\plugins\cyber_friend\prompt.txt', encoding='utf-8') as f:
+        with open(getPath('plugins\cyber_friend\prompt.txt'), encoding='utf-8') as f:
             self.prompt = f.read()
 
     def call(self, records):

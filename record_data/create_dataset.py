@@ -2,6 +2,9 @@ import json
 import random
 import os
 
+from GetPathUtil import getPath
+
+
 def read_prompt_file(prompt_file_path):
     with open(prompt_file_path, 'r', encoding='utf-8') as file:
         return file.read()
@@ -38,8 +41,8 @@ def generate_datasets(prompt_file_path, json_file_path, num_datasets=30000):
     return datasets
 
 # 文件路径
-prompt_file_path = 'D:\holk\CyberFriend\plugins\cyber_friend\prompt.txt'
-json_file_path = 'D:/holk/CyberFriend/record_data/536348689_2024-02-03.json'  # 替换为你的 JSON 文件路径
+prompt_file_path = getPath('plugins\cyber_friend\prompt.txt')
+json_file_path = getPath('record_data/536348689_2024-02-03.json')  # 替换为你的 JSON 文件路径
 
 # 生成数据集
 datasets = generate_datasets(prompt_file_path, json_file_path)
