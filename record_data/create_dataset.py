@@ -2,12 +2,10 @@ import json
 import random
 import os
 
-# 读取 prompt.txt 文件内容
 def read_prompt_file(prompt_file_path):
     with open(prompt_file_path, 'r', encoding='utf-8') as file:
         return file.read()
 
-# 从 JSON 文件中获取一系列连续的聊天记录
 def get_consecutive_chat_records(data, num_records=15):
     if len(data) < num_records + 1:
         return None, None
@@ -16,7 +14,6 @@ def get_consecutive_chat_records(data, num_records=15):
     next_record = data[start_index + num_records]
     return selected_records, next_record
 
-# 构建所需的数据集格式
 def create_dataset_entry(prompt_content, chat_records, next_record):
     conversations = [{'role': 'system', 'content': prompt_content}]
     user_conversation = {'role': 'user', 'content': str([{str(record['user_id']): record['message']} for record in chat_records])}
@@ -24,8 +21,7 @@ def create_dataset_entry(prompt_content, chat_records, next_record):
     conversations.extend([user_conversation, assistant_conversation])
     return {'conversations': conversations}
 
-# 主函数
-def generate_datasets(prompt_file_path, json_file_path, num_datasets=10000):
+def generate_datasets(prompt_file_path, json_file_path, num_datasets=30000):
     datasets = []
     prompt_content = read_prompt_file(prompt_file_path)
 
@@ -43,12 +39,12 @@ def generate_datasets(prompt_file_path, json_file_path, num_datasets=10000):
 
 # 文件路径
 prompt_file_path = 'D:\holk\CyberFriend\plugins\cyber_friend\prompt.txt'
-json_file_path = 'D:/holk/CyberFriend/record_data/536348689_2024-01-31.json'  # 替换为你的 JSON 文件路径
+json_file_path = 'D:/holk/CyberFriend/record_data/536348689_2024-02-03.json'  # 替换为你的 JSON 文件路径
 
 # 生成数据集
 datasets = generate_datasets(prompt_file_path, json_file_path)
 
 # 打印或以其他方式使用 datasets
 with open(json_file_path.replace('.json', '_train.json'), 'w', encoding='utf-8') as f:
-    for dataset_entry in datasets:
-        f.write(json.dumps(dataset_entry, ensure_ascii=False) + '\n')
+    # for dataset_entry in datasets:
+    f.write(json.dumps(datasets, ensure_ascii=False) + '\n')

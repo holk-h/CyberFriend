@@ -13,7 +13,7 @@ class GLM:
             "model": "chatglm3-6b",
             "messages": [
                 {"role": "system", "content": self.prompt},
-                {"role": "user", "content": f'{records}'}
+                {"role": "user", "content": str(records)}
             ],
             "stream": False,
             "max_tokens": 100,
