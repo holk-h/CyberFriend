@@ -2,7 +2,9 @@ import sqlite3
 import json
 import datetime
 import re
-
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from GetPathUtil import getPath
 
 database_path = getPath('plugins\message_record\message_record.db')
