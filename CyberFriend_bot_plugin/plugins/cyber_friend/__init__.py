@@ -1,5 +1,6 @@
 import random
 import re
+import time
 
 from nonebot import logger
 from nonebot import on_message, get_bots
@@ -59,7 +60,12 @@ async def handle_function(bot: Bot, event: Event):
             # records.append({str(extract_id(event.get_session_id())):str(event.get_message())})
 
             # logger.warning(event.get_session_id())
-            await weather.finish(glmCall(session_id))
+            message = glmCall(session_id)
+            if len(message) > 0:
+                messageRecordService.addOne(session_id, 0, str(message), time.time())
+                await weather.finish(message)
+            else:
+                await weather.finish()
             # await weather.finish(session_id)
     else:
         await weather.finish()

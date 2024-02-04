@@ -159,3 +159,9 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 *.db
+.json
+/CyberFriend_LLM_core/finetune_demo/output/
+/CyberFriend_LLM_core/finetune_demo/data/
+/CyberFriend_LLM_core/finetune_demo/wandb/
+/CyberFriend_LLM_core/finetune_demo/code/
+chatglm3-6b
