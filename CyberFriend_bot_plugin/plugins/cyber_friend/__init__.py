@@ -46,26 +46,13 @@ SESSION_ID_WHITE_LIST = ['793626723', '647155255', '819281715','494611635']
 @weather.handle()
 async def handle_function(bot: Bot, event: Event):
     session_id = extract_session(event.get_session_id())
-    
-    # logger.warning(records)
-    logger.warning(session_id)
-    # logger.warning(extract_session(event.get_session_id())
-    
-    # logger.warning(records)
-    # logger.warning(records[1:].append(str(event.get_message())))
-    # logger.warning(extract_session(event.get_session_id()))
     if session_id in SESSION_ID_WHITE_LIST:
         if event.is_tome() or random.randint(1,10) == 4:
-            # logger.warning(extract_session(event.get_session_id()))
-            # records.append({str(extract_id(event.get_session_id())):str(event.get_message())})
-
-            # logger.warning(event.get_session_id())
             message = glmCall(session_id)
             if len(message) > 0:
                 messageRecordService.addOne(session_id, 0, str(message), time.time())
                 await weather.finish(message)
             else:
                 await weather.finish()
-            # await weather.finish(session_id)
     else:
         await weather.finish()

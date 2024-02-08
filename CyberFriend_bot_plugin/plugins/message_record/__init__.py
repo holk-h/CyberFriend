@@ -4,6 +4,7 @@ from nonebot import get_driver, get_bots, on_message
 from nonebot.plugin import PluginMetadata
 from nonebot.internal.adapter import Bot, Event
 from nonebot.typing import T_State
+from nonebot import logger
 
 from .config import Config
 
@@ -20,7 +21,7 @@ global_config = get_driver().config
 config = Config.parse_obj(global_config)
 
 bot = get_bots()
-message_record = on_message(rule=None, priority=10, block=True)
+message_record = on_message(rule=None, priority=10, block=False)
 messageRecordService = MessageRecordService()
 @message_record.handle()
 async def handle_function(bot: Bot, event: Event, state: T_State):
@@ -34,6 +35,7 @@ async def handle_function(bot: Bot, event: Event, state: T_State):
     if event.message_type == "group":
         # 获取群聊的 ID
         group_id = event.group_id
+        logger.warning(group_id)
         # 获取群聊的名称
         # group_info = await bot.get_group_info(group_id=group_id)
         # group_name = group_info["group_name"]
