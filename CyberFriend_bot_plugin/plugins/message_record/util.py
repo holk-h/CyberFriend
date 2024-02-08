@@ -32,7 +32,7 @@ class MessageRecordService:
         return self.session.query(MessageRecord).all()
     
     def querySpecifyAll(self, group_id):
-        return self.session.query(MessageRecord).filter(MessageRecord.group_id==group_id).all()
+        return self.session.query(MessageRecord).filter(MessageRecord.group_id==group_id).order_by(MessageRecord.data_time.desc()).all()
 
     def queryLast(self, group_id):
         return self.session.query(MessageRecord).filter(MessageRecord.group_id==group_id).order_by(MessageRecord.data_time.desc()).limit(15).all()

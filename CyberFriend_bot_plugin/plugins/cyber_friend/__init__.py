@@ -1,10 +1,12 @@
 import random
 import re
 import time
+import ast
 
 from nonebot import logger
 from nonebot import on_message, get_bots
 from nonebot.internal.adapter import Bot, Event
+from nonebot.adapters.onebot.v11 import Message
 
 from .utils import GLM
 from ..message_record import MessageRecordService
@@ -12,7 +14,7 @@ from ..message_record import MessageRecordService
 bot = get_bots()
 glm = GLM()
 messageRecordService = MessageRecordService()
-weather = on_message(priority=10, block=True)
+llm_reply = on_message(priority=10, block=True)
 
 def extract_session(text):
     pattern = r"group_(\d+)_\d+"
@@ -41,18 +43,25 @@ def glmCall(session_id):
     logger.warning(records)
     return glm.call(records)
 
-SESSION_ID_WHITE_LIST = ['793626723', '647155255', '819281715','494611635']
+SESSION_ID_WHITE_LIST = ['647155255', '793626723', '819281715']
 
-@weather.handle()
+@llm_reply.handle()
 async def handle_function(bot: Bot, event: Event):
     session_id = extract_session(event.get_session_id())
-    if session_id in SESSION_ID_WHITE_LIST:
+    if session_id in SESSION_ID_WHITE_LIST and '[CQ:' not in event.get_message():
         if event.is_tome() or random.randint(1,10) == 4:
             message = glmCall(session_id)
+            logger.warning(message)
+            try:
+                for msg in ast.literal_eval(message):
+                    logger.warning(msg)
+                    await llm_reply.send(Message(msg))
+            except Exception as e:
+                logger.warning(e)
             if len(message) > 0:
                 messageRecordService.addOne(session_id, 0, str(message), time.time())
-                await weather.finish(message)
+                await llm_reply.finish()
             else:
-                await weather.finish()
+                await llm_reply.finish()
     else:
-        await weather.finish()
+        await llm_reply.finish()

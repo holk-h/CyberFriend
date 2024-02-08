@@ -35,7 +35,7 @@ async def handle_function(bot: Bot, event: Event, state: T_State):
     if event.message_type == "group":
         # 获取群聊的 ID
         group_id = event.group_id
-        logger.warning(group_id)
+        # logger.warning(group_id)
         # 获取群聊的名称
         # group_info = await bot.get_group_info(group_id=group_id)
         # group_name = group_info["group_name"]

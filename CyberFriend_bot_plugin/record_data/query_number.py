@@ -18,6 +18,6 @@ def count_messages(db_path, target_group_id):
 
     return count
 
-target_group_id = 793626723
+target_group_id = 536348689
 message_count = count_messages(database_path, target_group_id)
 print(f"Group ID {target_group_id} has {message_count} messages recorded.")
