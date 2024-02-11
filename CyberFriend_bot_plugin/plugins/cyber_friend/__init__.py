@@ -48,7 +48,7 @@ SESSION_ID_WHITE_LIST = ['647155255', '793626723', '819281715']
 @llm_reply.handle()
 async def handle_function(bot: Bot, event: Event):
     session_id = extract_session(event.get_session_id())
-    if session_id in SESSION_ID_WHITE_LIST and '[CQ:' not in event.get_message():
+    if session_id in SESSION_ID_WHITE_LIST:
         if event.is_tome() or random.randint(1,10) == 4:
             message = glmCall(session_id)
             logger.warning(message)
