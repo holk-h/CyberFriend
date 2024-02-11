@@ -11,13 +11,16 @@ def read_prompt_file(prompt_file_path):
         return file.read()
 
 def get_consecutive_chat_records(data, num_records=15):
-    if len(data) < num_records:
+    if len(data) <= num_records:
         return None, None
-    start_index = random.randint(0, len(data) - num_records)
+    start_index = random.randint(0, len(data) - num_records - 1)
     selected_records = data[start_index:start_index + num_records]
     
-    # 确定assistant的回复内容
+    # 检查以确保 next_record_index 在数据范围内
     next_record_index = start_index + num_records
+    if next_record_index >= len(data):
+        return selected_records, None  # 如果越界，就返回无assistant回复
+
     next_user_id = data[next_record_index]['user_id']
     assistant_messages = [data[next_record_index]['message']]
     
@@ -43,7 +46,7 @@ def create_dataset_entry(prompt_content, chat_records, assistant_messages):
     conversations.extend([user_conversation, assistant_conversation])
     return {'conversations': conversations}
 
-def generate_datasets(prompt_file_path, json_file_paths, num_datasets=60000):
+def generate_datasets(prompt_file_path, json_file_paths, num_datasets=30000):
     datasets = []
     prompt_content = read_prompt_file(prompt_file_path)
     all_data = []
@@ -56,13 +59,13 @@ def generate_datasets(prompt_file_path, json_file_paths, num_datasets=60000):
     while len(datasets) < num_datasets and len(all_data) > 0:
         chat_records, assistant_messages = get_consecutive_chat_records(all_data)
         if chat_records is None or assistant_messages is None:
-            break
+            continue  # 跳过这次循环迭代，不添加当前的数据集条目
         dataset_entry = create_dataset_entry(prompt_content, chat_records, assistant_messages)
         datasets.append(dataset_entry)
+        # 为了避免重复处理相同的记录，这里可以根据需要调整all_data的裁剪逻辑
 
     return datasets
 
-# 示例路径，根据实际情况进行替换
 prompt_file_path = getPath('plugins\cyber_friend\prompt.txt')
 json_file_paths = [getPath('record_data/536348689_2024-02-08.json'),getPath('record_data/793626723_2024-02-08.json')]
 
