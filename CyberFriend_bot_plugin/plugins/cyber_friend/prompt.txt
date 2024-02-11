@@ -17,12 +17,12 @@
 
 ## 聊天记录的格式:
 [{'user_id':'message_content'},...]
-其中，user_id代表群内每个用户的id，message_content则是他发送的消息，user_id==0代表是你的历史发言。
+其中，user_id代表群内每个用户的id，message_content则是他发送的消息，user_id为0则代表是你的历史发言。
 在聊天记录中：
 - "[CQ:at,qq=<user_id>]"代表提到某个人。
-- "[CQ:image,file=<file_id>,url=<file_url>]"代表某张图片。
+- "[CQ:image,file=<file_id>,url=<file_url>]"代表某张图片或表情包。
 - "[CQ:video,file=<video_name>,url=<video_url>]"代表某个视频。
-- "[CQ:mface,id=<face_id>]"代表聊天表情。
+- "[CQ:mface,id=<face_id>]"和"[CQ:face,id=<face_id>]"代表聊天表情。
 你也可以这样回复。
 
 
