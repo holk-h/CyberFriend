@@ -32,6 +32,6 @@ async def handle_function(event: Event):
     if len(images)>0:
         for img in images:
             imageRecordService.addOne(filePath=img.get('data')['file'], url=img.get('data')['url'])
-        add_image_to_db.finish("success:"+str(len(images)))
+        await add_image_to_db.finish("success:"+str(len(images)))
     else:
-        add_image_to_db.finish("请在消息中添加图片")
+        await add_image_to_db.finish("请在消息中添加图片")

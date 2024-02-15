@@ -57,10 +57,10 @@ async def handle_function(bot: Bot, event: Event):
     if session_id in SESSION_ID_WHITE_LIST:
         if event.is_tome() or random.randint(1,10) == 4:
             message = glmCall(session_id)
-            logger.warning(message)
+            # logger.warning(message)
             try:
                 for msg in ast.literal_eval(message):
-                    logger.warning('msg:::'+msg)
+                    # logger.warning('msg:'+msg)
                     if msg in IMAGE_PATTERN:
                         await llm_reply.send(MessageBuilder().appendImage(imageRecordService.getRandomImage()).build())
                     else:

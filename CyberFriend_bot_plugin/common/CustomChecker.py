@@ -10,7 +10,7 @@ from plugins.update_members import membersService
 
 
 async def is_me(event: Event):
-    return ((event.get_user_id() in [mem.user_id for mem in membersService.queryByGroupId(647155255)] and isinstance(event, PrivateMessageEvent))
+    return ((event.get_user_id() in [str(mem.user_id) for mem in membersService.queryByGroupId(647155255)] and isinstance(event, PrivateMessageEvent))
             or (isinstance(event, GroupMessageEvent) and event.group_id == 647155255))
 
 
