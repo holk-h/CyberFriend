@@ -18,7 +18,7 @@ from common.MessageBuilder import MessageBuilder
 bot = get_bots()
 glm = GLM()
 messageRecordService = MessageRecordService()
-llm_reply = on_message(priority=10, block=True)
+llm_reply = on_message(priority=10, block=False)
 
 def extract_session(text):
     pattern = r"group_(\d+)_\d+"
@@ -49,7 +49,7 @@ def glmCall(session_id):
 
 SESSION_ID_WHITE_LIST = ['647155255', '793626723', '819281715']
 
-IMAGE_PATTERN = ["?", "我不知道"]
+IMAGE_PATTERN = ["？", "我不知道", "?"]
 
 @llm_reply.handle()
 async def handle_function(bot: Bot, event: Event):
@@ -60,10 +60,13 @@ async def handle_function(bot: Bot, event: Event):
             logger.warning(message)
             try:
                 for msg in ast.literal_eval(message):
-                    logger.warning(msg)
+                    logger.warning('msg:::'+msg)
                     if msg in IMAGE_PATTERN:
+                        logger.warning('msg:::111'+msg)
+                        logger.warning(str(MessageBuilder().appendImage(imageRecordService.getRandomImage()).build()))
                         await llm_reply.send(MessageBuilder().appendImage(imageRecordService.getRandomImage()).build())
                     else:
+                        logger.warning('msg:::222'+msg)
                         await llm_reply.send(Message(msg))
             except Exception as e:
                 logger.warning(e)

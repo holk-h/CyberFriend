@@ -9,6 +9,7 @@ from nonebot.plugin import PluginMetadata
 
 from .MembersUtil import MembersService, membersService
 from .config import Config
+from nonebot import logger
 
 __plugin_meta__ = PluginMetadata(
     name="update_members",
@@ -24,19 +25,20 @@ config = Config.parse_obj(global_config)
 
 
 p = Permission(is_me)
-member_update = on_command("update", permission=p)
+member_update = on_command("update")
 
 
 
 @member_update.handle()
 async def handle_function(event: Event):
     msg: str = event.get_message().__str__()
+    # logger.warning("msg:"+msg)
     ans = []
-    if msg.strip() != "#update":
+    if msg.strip() != "/update":
         todo = re.split(r"\s+", msg)[1:]
     else:
         todo = ["647155255"]
-    print("start update ", todo)
+    # logger.warning("msg:"+str(todo))
     for i in todo:
         tmp = await membersService.updateGroup(i)
         toAp = "OK" if tmp else "FAIL"

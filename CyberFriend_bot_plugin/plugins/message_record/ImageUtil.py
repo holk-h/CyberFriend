@@ -40,7 +40,7 @@ def get_file_name(file=None, url=None):
     if len(file_name) == 0 and url is not None:
         us = url.split("/")
         file_name = us[-1]
-        if len(us[-1])<5 and len(us)>1:
+        if len(us[-1])<9 and len(us)>1:
             file_name = us[-2]
     if len(file_name) < 5:
         file_name = uuid.uuid4().hex
@@ -113,7 +113,7 @@ class ImageRecordService:
 imageRecordService = ImageRecordService()
 
 if __name__ == '__main__':
-    imageRecordService.addOne(r"F:\Pictures\temp\QQ截图20240215142045.jpg")
-    imageRecordService.addOne(filePath=None, url="https://tianquan.gtimg.cn/nudgeaction/item/0/expression.jpg")
+    # imageRecordService.addOne(r"F:\Pictures\temp\QQ截图20240215142045.jpg")
+    # imageRecordService.addOne(filePath=None, url="https://tianquan.gtimg.cn/nudgeaction/item/0/expression.jpg")
     print(imageRecordService.queryAllName())
-    print(imageRecordService.getRandomImage())
+    # print(imageRecordService.getRandomImage())

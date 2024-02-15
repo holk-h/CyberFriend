@@ -53,7 +53,7 @@ class MembersService:
     def getSelfBot(self):
         if self.bot is None:
             try:
-                self.bot = get_bots()[BOT_ID]
+                self.bot = get_bots()[str(BOT_ID)]
             except ValueError:
                 self.bot = None
         return self.bot
