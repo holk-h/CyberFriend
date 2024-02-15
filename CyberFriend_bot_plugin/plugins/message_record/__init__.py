@@ -33,7 +33,7 @@ async def handle_function(bot: Bot, event: Event, state: T_State):
     # 获取发送的消息内容
     message = event.get_message()
     for m in message["image"]:
-        imageRecordService.addOne(filePath=None, url=m.get("data")["url"])
+        logger.info(f"{m.get('data')['file']}: {m.get('data')['url']}")
     # 判断是否为群聊消息
     if event.message_type == "group":
         # 获取群聊的 ID

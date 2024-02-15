@@ -25,7 +25,7 @@ config = Config.parse_obj(global_config)
 
 
 p = Permission(is_me)
-member_update = on_command("update")
+member_update = on_command("update", permission=p)
 
 
 

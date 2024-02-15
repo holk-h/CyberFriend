@@ -42,7 +42,7 @@ def get_file_name(file=None, url=None):
         file_name = us[-1]
         if len(us[-1])<9 and len(us)>1:
             file_name = us[-2]
-    if len(file_name) < 5:
+    if len(file_name) < 9:
         file_name = uuid.uuid4().hex
     # replace any special characters in the file name with underscores
     file_name = re.sub("[^a-zA-Z0-9.]", "_", file_name)

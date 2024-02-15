@@ -62,11 +62,8 @@ async def handle_function(bot: Bot, event: Event):
                 for msg in ast.literal_eval(message):
                     logger.warning('msg:::'+msg)
                     if msg in IMAGE_PATTERN:
-                        logger.warning('msg:::111'+msg)
-                        logger.warning(str(MessageBuilder().appendImage(imageRecordService.getRandomImage()).build()))
                         await llm_reply.send(MessageBuilder().appendImage(imageRecordService.getRandomImage()).build())
                     else:
-                        logger.warning('msg:::222'+msg)
                         await llm_reply.send(Message(msg))
             except Exception as e:
                 logger.warning(e)
