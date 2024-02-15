@@ -1,5 +1,7 @@
+import os
 import random
 import re
+import sys
 import time
 import ast
 
@@ -9,7 +11,9 @@ from nonebot.internal.adapter import Bot, Event
 from nonebot.adapters.onebot.v11 import Message
 
 from .utils import GLM
-from ..message_record import MessageRecordService
+from ..message_record import MessageRecordService, imageRecordService
+sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
+from common.MessageBuilder import MessageBuilder
 
 bot = get_bots()
 glm = GLM()
@@ -45,6 +49,8 @@ def glmCall(session_id):
 
 SESSION_ID_WHITE_LIST = ['647155255', '793626723', '819281715']
 
+IMAGE_PATTERN = ["?", "我不知道"]
+
 @llm_reply.handle()
 async def handle_function(bot: Bot, event: Event):
     session_id = extract_session(event.get_session_id())
@@ -55,7 +61,10 @@ async def handle_function(bot: Bot, event: Event):
             try:
                 for msg in ast.literal_eval(message):
                     logger.warning(msg)
-                    await llm_reply.send(Message(msg))
+                    if msg in IMAGE_PATTERN:
+                        await llm_reply.send(MessageBuilder().appendImage(imageRecordService.getRandomImage()).build())
+                    else:
+                        await llm_reply.send(Message(msg))
             except Exception as e:
                 logger.warning(e)
             if len(message) > 0:

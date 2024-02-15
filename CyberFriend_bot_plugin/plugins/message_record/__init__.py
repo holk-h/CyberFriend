@@ -6,6 +6,7 @@ from nonebot.internal.adapter import Bot, Event
 from nonebot.typing import T_State
 from nonebot import logger
 
+from .ImageUtil import imageRecordService
 from .config import Config
 
 __plugin_meta__ = PluginMetadata(
@@ -31,6 +32,8 @@ async def handle_function(bot: Bot, event: Event, state: T_State):
     user_name = event.sender.nickname
     # 获取发送的消息内容
     message = event.get_message()
+    for m in message["image"]:
+        imageRecordService.addOne(filePath=None, url=m.get("data")["url"])
     # 判断是否为群聊消息
     if event.message_type == "group":
         # 获取群聊的 ID

@@ -9,6 +9,6 @@ requires-python = ">=3.8, <4.0"
 adapters = [
     { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" }
 ]
-plugins = []
+plugins = ["nonebot_plugin_apscheduler"]
 plugin_dirs = ["plugins"]
 builtin_plugins = []

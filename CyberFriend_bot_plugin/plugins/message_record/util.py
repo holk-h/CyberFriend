@@ -43,12 +43,23 @@ class MessageRecordService:
         session.commit()
 
 if __name__ == '__main__':
-    messageRecordService = MessageRecordService()
+    # messageRecordService = MessageRecordService()
     # for i in range(10):
     #     messageRecordService.addOne(2, 2, "adsbbb"+str(i), time.time())
     #     time.sleep(0.1)
-    print(messageRecordService.queryAll())
+    # print(messageRecordService.queryAll())
     # print(messageRecordService.queryLast(2))
+    from nonebot.adapters.onebot.v11 import Message, MessageSegment
+    message = Message(
+        [
+            MessageSegment.text("test"),
+            MessageSegment.text("test4"),
+            MessageSegment.image(r"http://gchat.qpic.cn/gchatpic_new/0/0-0-B8F694B7886F0E94481D91958E8AE31F/0?term=2")
+        ]
+    )
+    for i in message["image"]:
+        print(i.get("data"))
+        print(i)
 
 
 

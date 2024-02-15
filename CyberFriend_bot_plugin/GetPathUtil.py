@@ -7,3 +7,5 @@ def getPath(*relativePath: str) -> str:
     p = os.path.join(project_path, *relativePathFiltered)
     os.makedirs(os.path.dirname(p), exist_ok=True)
     return p
+
+BOT_ID=2469104787
