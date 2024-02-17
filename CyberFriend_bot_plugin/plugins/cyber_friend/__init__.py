@@ -47,7 +47,7 @@ def glmCall(session_id):
     logger.warning(records)
     return glm.call(records)
 
-SESSION_ID_WHITE_LIST = ['647155255', '793626723', '819281715']
+SESSION_ID_WHITE_LIST = ['647155255', '793626723']
 
 IMAGE_PATTERN = ["？", "我不知道", "?"]
 
@@ -57,7 +57,7 @@ async def handle_function(bot: Bot, event: Event):
     if session_id in SESSION_ID_WHITE_LIST:
         if event.is_tome() or random.randint(1,10) == 4:
             message = glmCall(session_id)
-            # logger.warning(message)
+            logger.warning(message)
             try:
                 for msg in ast.literal_eval(message):
                     # logger.warning('msg:'+msg)

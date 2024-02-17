@@ -46,7 +46,7 @@ def create_dataset_entry(prompt_content, chat_records, assistant_messages):
     conversations.extend([user_conversation, assistant_conversation])
     return {'conversations': conversations}
 
-def generate_datasets(prompt_file_path, json_file_paths, num_datasets=30000):
+def generate_datasets(prompt_file_path, json_file_paths, num_datasets=180000):
     datasets = []
     prompt_content = read_prompt_file(prompt_file_path)
     all_data = []
@@ -67,7 +67,7 @@ def generate_datasets(prompt_file_path, json_file_paths, num_datasets=30000):
     return datasets
 
 prompt_file_path = getPath('plugins\cyber_friend\prompt.txt')
-json_file_paths = [getPath('record_data/536348689_2024-02-08.json'),getPath('record_data/793626723_2024-02-08.json')]
+json_file_paths = [getPath('record_data/536348689_2024-02-15.json'),getPath('record_data/793626723_2024-02-15.json')]
 
 # 生成数据集
 datasets = generate_datasets(prompt_file_path, json_file_paths)
