@@ -12,9 +12,9 @@ class MessageBuilder:
     def appendAt(self, user_id, name=None):
         """尽量随便加个name，不然可能会出现一个名字需要10s超时失败的查询"""
         if name is None:
-            self.message += "[CQ:at,qq=" + str(user_id) + ",name=" + user_id + "]"
+            self.message += "[CQ:at,qq=" + str(user_id) + ",name=" + str(user_id) + "]"
         else:
-            self.message += "[CQ:at,qq=" + str(user_id) + ",name=" + name + "]"
+            self.message += "[CQ:at,qq=" + str(user_id) + ",name=" + str(name) + "]"
         return self
 
     def appendText(self, msg):
