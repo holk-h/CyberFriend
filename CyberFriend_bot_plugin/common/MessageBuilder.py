@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from base64 import b64encode
 
-from nonebot.adapters.onebot.v11 import Message
+from nonebot.adapters.onebot.v11 import Message, Event
 
 
 class MessageBuilder:
@@ -19,6 +19,14 @@ class MessageBuilder:
 
     def appendText(self, msg):
         self.message += msg
+        return self
+
+    def appendReply(self, id:int):
+        self.message += f"[CQ:reply,id={id}]"
+        return self
+
+    def appendReplyWithEvent(self, event: Event):
+        self.message += f"[CQ:reply,id={event.message_id}]"
         return self
 
     def appendImage(self, file: str):
