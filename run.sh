@@ -1,34 +1,43 @@
 #!/bin/bash
 
-# Ensure tmux is installed
-if ! command -v tmux &> /dev/null
-then
+if ! command -v tmux &> /dev/null; then
     echo "tmux could not be found. Please install tmux."
     exit
 fi
 
-# Check if python3 and pip3 are available, otherwise use python and pip
 PYTHON_CMD=python3
 PIP_CMD=pip3
-if ! command -v $PYTHON_CMD &> /dev/null
-then
+if ! command -v $PYTHON_CMD &> /dev/null; then
     PYTHON_CMD=python
     PIP_CMD=pip
 fi
 
-# Verify if pip is accessible via the selected Python command
-if ! $PYTHON_CMD -m pip --version &> /dev/null
-then
+if ! $PYTHON_CMD -m pip --version &> /dev/null; then
     echo "pip could not be found for $PYTHON_CMD. Please ensure pip is installed."
     exit
 fi
 
-echo "Using $PYTHON_CMD for Python commands and $PIP_CMD for pip commands"
+tmux new-session -d -s CyberFriendCore "$PYTHON_CMD -m $PIP_CMD install -r ./CyberFriend_LLM_core/requirements.txt; $PYTHON_CMD ./CyberFriend_LLM_core/api_server.py"
+echo "API started in a tmux session named CyberFriendCore, use 'tmux attach -t CyberFriendCore' to attach to the session."
+tmux new-session -d -s CyberFriendBotPlugin 'cd ./CyberFriend_bot_plugin && '"$PYTHON_CMD"' -m $PIP_CMD install -r requirements.txt && nb run'
+echo "CyberFriendBotPlugin started in a tmux session named CyberFriendBotPlugin, use 'tmux attach -t CyberFriendBotPlugin' to attach to the session."
 
-# Start the API server in a new tmux session, adapting to the Python and pip commands
-tmux new-session -d -s CyberFriend_api_server "$PYTHON_CMD -m $PIP_CMD install -r ./CyberFriend_LLM_core/requirements.txt; $PYTHON_CMD ./CyberFriend_LLM_core/api_server.py"
+# 避免路径问题，直接创建一个 shell 脚本
+cat << 'EOF' > fine_tune_and_restart.sh
+#!/bin/bash
+PYTHON_CMD=python3
+if ! command -v $PYTHON_CMD &> /dev/null; then
+    PYTHON_CMD=python
+fi
+tmux send-keys -t CyberFriendCore C-c
+sleep 10
+$PYTHON_CMD ./CyberFriend_LLM_core/finetune/finetune_hf.py data/ /chatglm3-6b ./CyberFriend_LLM_core/finetune/configs/configs/lora.yaml
+tmux send-keys -t CyberFriendCore "$PYTHON_CMD ./CyberFriend_LLM_core/api_server.py" Enter
+EOF
 
-# Start the bot plugin in another tmux session, adapting to the Python and pip commands
-tmux new-session -d -s CyberFriendBot 'cd ./CyberFriend_bot_plugin && '"$PYTHON_CMD"' -m $PIP_CMD install -r requirements.txt && nb run'
+chmod +x fine_tune_and_restart.sh
 
-echo "Started CyberFriend_api_server and CyberFriendBot in separate tmux sessions, use 'tmux attach -t CyberFriend_api_server' and 'tmux attach -t CyberFriendBot' to view the output of each."
+CRON_JOB="0 4 * * * /absolute/path/to/fine_tune_and_restart.sh"
+(crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
+
+echo "Setup complete. Fine-tuning and restart scheduled at 4 AM daily."
