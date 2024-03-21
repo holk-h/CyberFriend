@@ -3,6 +3,8 @@
 
 技术上，项目使用 Nonebot 作为机器人交互框架，通过使用各种聊天协议适配器，从而实现支持任何聊天平台（如 QQ、Telegram 等等）；目前使用 ChatGLM3 作为 LLM 模型，通过收集群内聊天记录来微调模型，可以实现模拟真实群友的功能。
 
+[代码结构和说明](resources/code_structure.md)
+
 项目架构图：
 ![](resources/structure.png)
 
