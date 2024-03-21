@@ -166,3 +166,4 @@ cython_debug/
 /CyberFriend_LLM_core/finetune_demo/wandb/
 /CyberFriend_LLM_core/finetune_demo/code/
 chatglm3-6b
+.DS_store
