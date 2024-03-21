@@ -6,7 +6,7 @@
 [代码结构和说明](resources/code_structure.md)
 
 项目架构图：
-![](resources/structure.png)
+![](resources/proj_structure.png)
 
 目前正在开发阶段，初步效果非常炸裂，欢迎加入我们！
 
