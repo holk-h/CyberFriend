@@ -35,7 +35,35 @@
 
 ## 使用
 
-🚧 待施工 🚧
+如项目架构图所示，本项目可分为三大模块，分别单独部署：聊天平台及适配器（目前项目采用 QQ+Shamrock）、Nonebot机器人框架中控与数据库、LLM模块。
+
+下面依次介绍这三大模块的部署操作。
+
+### 聊天平台适配器的部署
+
+请参考 [Shamrock-快速开始](https://trumanin2023.github.io/Shamrock/guide/getting-started.html)
+
+### Nonebot及数据库的部署
+
+首先请参考 [Nonebot-快速开始](https://nonebot.dev/docs/)，或者在 `CyberFriend_bot_plugin` 中，运行 `pip install -r requirements.txt`，安装相关依赖。
+
+然后，在 `CyberFriend_bot_plugin` 中，配置好 `.env.prod` 中，你的 Shamrock 的端口，之后执行 `nb run` 命令。
+
+理想状态下，输出 `[INFO] websockets | connection open`，即为运行成功，数据库也会一并开启。
+
+### LLM 模块的部署
+
+目前我们使用 [`ChatGLM3`](https://github.com/THUDM/ChatGLM3) 作为 LLM 模型。
+
+首先，进入 `CyberFriend_LLM_core`，执行 `pip install -r requirements.txt & python download.py`，安装依赖并下载模型权重，权重会下载到这个目录下，你可以修改文件中的 `cache_dir` 来更改下载路径，或是使用别的下载方法，例如直接从 [chatglm3-6b-huggingface](https://huggingface.co/THUDM/chatglm3-6b) 上下载。
+
+然后，执行 `python api_server.py`，运行开启 LLM 模型的 api 服务器。
+
+要进行模型微调，你需要参考 [chatglm3-微调](https://github.com/THUDM/ChatGLM3/tree/main/finetune_demo)，使用 `CyberFriend_bot_plugin/record_data` 中的工具来构建数据集，然后在 `CyberFriend_LLM_core/finetune` 中，执行 `python finetune_hf.py /path/to/dataset /path/to/model configs/lora.yaml` 来进行微调。
+
+至此，整个项目的数据流就打通了，你可以正常使用了。
+
+> 模型微调与一键运行的脚本正在构建与测试中...之后会更新
 
 ## ToDo:
    - RAG 自动记录与检索
