@@ -11,7 +11,7 @@ import sys
 import os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from GetPathUtil import getPath, BOT_ID
+from CyberFriend_bot_plugin.GetPathUtil import getPath, BOT_ID
 
 engine = create_engine('sqlite:///' + getPath("plugins/update_members/members.db"), echo=False)
 Base = declarative_base()

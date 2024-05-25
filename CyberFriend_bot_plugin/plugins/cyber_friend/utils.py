@@ -3,7 +3,7 @@ import json
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from GetPathUtil import getPath
+from CyberFriend_bot_plugin.GetPathUtil import getPath
 
 
 class GLM:

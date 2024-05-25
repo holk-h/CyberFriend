@@ -4,7 +4,7 @@ import os
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from GetPathUtil import getPath
+from CyberFriend_bot_plugin.GetPathUtil import getPath
 
 def read_prompt_file(prompt_file_path):
     with open(prompt_file_path, 'r', encoding='utf-8') as file:
