@@ -10,7 +10,7 @@ from .config import Config
 from ..message_record import imageRecordService
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from common.CustomChecker import is_me
+from CyberFriend_bot_plugin.common.CustomChecker import is_me
 
 __plugin_meta__ = PluginMetadata(
     name="add_image_to_db",

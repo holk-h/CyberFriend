@@ -6,7 +6,7 @@ import sys
 from nonebot.adapters.onebot.v11 import Event, PrivateMessageEvent, GroupMessageEvent
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from plugins.update_members import membersService
+from CyberFriend_bot_plugin.plugins.update_members import membersService
 
 
 async def is_me(event: Event):

@@ -20,11 +20,11 @@ from sse_starlette.sse import EventSourceResponse
 EventSourceResponse.DEFAULT_PING_INTERVAL = 1000
 
 # set LLM path
-MODEL_PATH = '/home/holk/holk_code/ChatGLM3/chatglm3-6b'
-TOKENIZER_PATH = '/home/holk/holk_code/ChatGLM3/chatglm3-6b'
+MODEL_PATH = 'ZhipuAI/chatglm3-6b'
+TOKENIZER_PATH = 'ZhipuAI/chatglm3-6b'
 
 # set Embedding Model path
-EMBEDDING_PATH = '/home/holk/holk_code/ChatGLM3/chatglm3-6b'
+EMBEDDING_PATH = 'ZhipuAI/chatglm3-6b'
 
 
 @asynccontextmanager
@@ -493,7 +493,7 @@ def contains_custom_function(value: str) -> bool:
 
 
 if __name__ == "__main__":
-    model_path = "./chatglm3-6b"
+    model_path = "ZhipuAI/chatglm3-6b"
     from transformers import AutoTokenizer, AutoModelForCausalLM
     from peft import PeftModel
  
