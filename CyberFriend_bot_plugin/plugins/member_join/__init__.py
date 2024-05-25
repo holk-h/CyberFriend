@@ -8,7 +8,7 @@ from nonebot.plugin import PluginMetadata
 from nonebot import logger
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from GetPathUtil import getPath, BOT_ID
+from CyberFriend_bot_plugin.GetPathUtil import getPath, BOT_ID
 from .config import Config
 
 __plugin_meta__ = PluginMetadata(

@@ -16,7 +16,7 @@ from langchain_core.documents import Document
 from nonebot import logger
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../CyberFriend_bot_plugin'))
-from GetPathUtil import getPath
+from CyberFriend_bot_plugin.GetPathUtil import getPath
 
 import threading
 

@@ -7,7 +7,7 @@ import sys
 
 # Add the parent directory to the path to import GetPathUtil
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from GetPathUtil import getPath
+from CyberFriend_bot_plugin.GetPathUtil import getPath
 
 def get_database_path():
     return getPath('plugins\\message_record\\message_record.db')

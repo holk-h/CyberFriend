@@ -10,7 +10,7 @@ from nonebot.plugin import PluginMetadata
 from .config import Config
 from ..update_members import membersService
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from GetPathUtil import getPath, BOT_ID
+from CyberFriend_bot_plugin.GetPathUtil import getPath, BOT_ID
 
 require("nonebot_plugin_apscheduler")
 

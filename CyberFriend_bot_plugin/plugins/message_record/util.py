@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from GetPathUtil import getPath
+from CyberFriend_bot_plugin.GetPathUtil import getPath
 
 engine = create_engine('sqlite:///'+getPath("plugins/message_record/message_record.db"), echo=False)
 Base = declarative_base()
