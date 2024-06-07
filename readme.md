@@ -45,6 +45,7 @@
 ### 聊天平台适配器的部署
 
 请参考 [Shamrock-快速开始](https://trumanin2023.github.io/Shamrock/guide/getting-started.html)
+或者你可以使用其他qq的适配器，例如[Napcat](https://napneko.github.io/zh-CN/)，同样使用[Onebot v11](https://onebot.dev/)标准，你只需要填写好适配器和Nonebot的连接即可。
 
 ### Nonebot及数据库的部署
 
